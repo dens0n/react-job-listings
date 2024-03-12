@@ -15,15 +15,29 @@ nav {
     border-bottom: 2px solid hsl(0, 0%, 90%);
     box-shadow: 0px 16px 32px 8px rgba(0, 0, 0, 0.05);
 }
-
-.search-container {
+#search-container {
+    display: flex;
+    align-items: center;
     width: 25rem;
 }
+#search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 25px;
+    background: transparent;
+    border: none;
+}
 input {
+    font-size: 16px;
     width: 20rem;
     padding: 8px;
-    border-radius: 25pc;
+    border-radius: 10px;
     border: 1px solid hsl(0, 0%, 50%);
+}
+input:focus {
+    outline: none;
 }
 /*  */
 

@@ -1,15 +1,31 @@
-import React from "react";
-import jobs from "./data";
-import JobCards from "./components/JobCards";
-import Nav from "./components/Nav";
 import "./App.css";
+import React, { useState } from "react";
+import Search from "./components/Search";
+import jobData from "./data";
+import JobCards from "./components/JobCards";
 
 function App() {
+    const [filteredJobs, setFilteredJobs] = useState(jobData);
+
+    const handleSearch = (searchTerm) => {
+        const filtered = jobData.filter((job) =>
+            job.position.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredJobs(filtered);
+    };
+
     return (
         <div>
-            <Nav />
+            <nav>
+                <img
+                    src="./assets/JobChaser-logo.svg"
+                    alt="JobChaser"
+                    width={"100px"}
+                />
+                <Search onSearch={handleSearch} />
+            </nav>
             <main>
-                {jobs.map((job) => (
+                {filteredJobs.map((job) => (
                     <JobCards
                         key={job.id}
                         id={job.id}
