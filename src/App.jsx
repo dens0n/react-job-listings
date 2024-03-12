@@ -15,7 +15,7 @@ function App() {
     };
 
     return (
-        <div>
+        <>
             <nav>
                 <img
                     src="./assets/JobChaser-logo.svg"
@@ -43,11 +43,9 @@ function App() {
                 ))}
             </main>
             <footer>
-                <div>
-                    <p>@copyright</p>
-                </div>
+                <p>@copyright</p>
             </footer>
-        </div>
+        </>
     );
 }
 
