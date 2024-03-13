@@ -8,9 +8,23 @@ function App() {
     const [filteredJobs, setFilteredJobs] = useState(jobData);
 
     const handleSearch = (searchTerm) => {
-        const filtered = jobData.filter((job) =>
-            job.position.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const filtered = jobData.filter((job) => {
+            return (
+                job.position.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                job.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                job.level.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                job.contract.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                job.postedAt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                job.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (job.languages &&
+                    job.languages.some((language) =>
+                        language
+                            .toLowerCase()
+                            .includes(searchTerm.toLowerCase())
+                    ))
+            );
+        });
         setFilteredJobs(filtered);
     };
 
