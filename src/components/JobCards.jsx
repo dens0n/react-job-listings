@@ -104,6 +104,15 @@ function JobCards(props) {
                                 }}
                             />
                         )}
+                        <div className="apply-logo-container">
+                            <a
+                                className="apply-btn"
+                                href={url ? url : backupURL}
+                            >
+                                Ansök här!
+                            </a>
+                            {logo && <img src={logo} alt="bild på logga" />}
+                        </div>
                     </div>
                 )}
             </div>

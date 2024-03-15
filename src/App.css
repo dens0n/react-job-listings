@@ -93,8 +93,11 @@ main {
 p {
     margin-top: 2px;
 }
-hr{
+hr {
     display: none;
+}
+strong {
+    font-weight: 600;
 }
 
 .employer-name {
@@ -123,6 +126,29 @@ hr{
 }
 .regular-url {
     font-size: 16px;
+}
+
+.apply-logo-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.apply-btn {
+    margin-top: 16px;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #a1a1a1;
+    color: #000000;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.apply-btn:hover {
+    background-color: #c8c8c8;
+    border-color: rgb(160, 200, 255); /* Ändra kantlinjens färg vid hover */
 }
 
 /*  */
