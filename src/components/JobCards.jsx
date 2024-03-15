@@ -25,6 +25,12 @@ function JobCards(props) {
     const toggleShowMore = () => {
         setShowMore(!showMore);
     };
+    function isHTML(str) {
+        const doc = new DOMParser().parseFromString(str, "text/html");
+        return Array.from(doc.body.childNodes).some(
+            (node) => node.nodeType === 1
+        );
+    }
 
     return (
         <>
@@ -69,7 +75,17 @@ function JobCards(props) {
                 </div>
                 {showMore && description && (
                     <div className="description-container">
-                        <p>{description}</p>
+                        {isHTML(description) ? (
+                            <p
+                                dangerouslySetInnerHTML={{
+                                    __html: description,
+                                }}
+                            />
+                        ) : (
+                            <p style={{ whiteSpace: "pre-line" }}>
+                                {description}
+                            </p>
+                        )}
                     </div>
                 )}
             </div>
