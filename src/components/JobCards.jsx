@@ -25,6 +25,7 @@ function JobCards(props) {
     const toggleShowMore = () => {
         setShowMore(!showMore);
     };
+
     function isHTML(str) {
         const doc = new DOMParser().parseFromString(str, "text/html");
         return Array.from(doc.body.childNodes).some(
@@ -32,12 +33,23 @@ function JobCards(props) {
         );
     }
 
+    // Funktion för att göra länkar klickbara
+    const makeLinksClickable = (text) => {
+        return text.replace(
+            /((https?|ftp):\/\/[^\s/$.?#].[^\s]*)/g,
+            ' <a class="regular-url" href="$1" target="_blank">$1</a>'
+        );
+    };
+
     return (
         <>
             <div className="card-container" id={id}>
                 <div className="basic-info-container">
                     <div className="job-info-container">
-                        <a href={url ? url : backupURL}>
+                        <a
+                            className="headline-url"
+                            href={url ? url : backupURL}
+                        >
                             {headline ? headline : ""}
                         </a>
                         <p className="employer-name">
@@ -75,16 +87,22 @@ function JobCards(props) {
                 </div>
                 {showMore && description && (
                     <div className="description-container">
+                        <strong>Beskrivning:</strong>
+                        <br />
+                        <br />
                         {isHTML(description) ? (
-                            <p
+                            <div
                                 dangerouslySetInnerHTML={{
                                     __html: description,
                                 }}
                             />
                         ) : (
-                            <p style={{ whiteSpace: "pre-line" }}>
-                                {description}
-                            </p>
+                            <p
+                                style={{ whiteSpace: "pre-line" }}
+                                dangerouslySetInnerHTML={{
+                                    __html: makeLinksClickable(description),
+                                }}
+                            />
                         )}
                     </div>
                 )}
