@@ -1,40 +1,79 @@
+import { FaStar, FaRegStar, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { useState } from "react";
+
 function JobCards(props) {
     const {
         id,
-        company,
+        employer,
         logo,
-        position,
-        role,
-        level,
+        city,
+        occupation,
+        url,
+        backupURL,
+        headline,
         postedAt,
-        contract,
-        location,
-        languages,
-        tools,
+        description,
     } = props;
 
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [showMore, setShowMore] = useState(false);
+
+    const toggleFavorite = () => {
+        setIsFavorite(!isFavorite);
+    };
+
+    const toggleShowMore = () => {
+        setShowMore(!showMore);
+    };
+
     return (
-        <div className="card" key={id}>
-            <div className="job-info-container">
-                <div className="job-info-text">
-                    <h3>{position}</h3>
-                    <p>
-                        {company} - {location}
-                    </p>
-                    <p>{contract}</p>
-                    <p>Publiched: {postedAt}</p>
+        <>
+            <div className="card-container" id={id}>
+                <div className="basic-info-container">
+                    <div className="job-info-container">
+                        <a href={url ? url : backupURL}>
+                            {headline ? headline : ""}
+                        </a>
+                        <p className="employer-name">
+                            {employer} - {city}
+                        </p>
+                        <p>{occupation ? occupation : ""}</p>
+                        <p>{postedAt ? `Publicerad: ${postedAt}` : ""}</p>
+                    </div>
+                    <div className="favorite-show-more-container">
+                        {isFavorite ? (
+                            <FaStar
+                                onClick={toggleFavorite}
+                                size={24}
+                                color="blue"
+                            />
+                        ) : (
+                            <FaRegStar
+                                onClick={toggleFavorite}
+                                size={24}
+                                color="blue"
+                            />
+                        )}
+                        <button
+                            className="show-more-button"
+                            onClick={toggleShowMore}
+                        >
+                            {showMore ? "Visa mindre" : "Visa mer"}{" "}
+                            {showMore ? (
+                                <FaAngleUp size={24} />
+                            ) : (
+                                <FaAngleDown size={24} />
+                            )}
+                        </button>
+                    </div>
                 </div>
-                <div className="job-role-text">
-                    <p>
-                        {level} {role.toLowerCase()} developer
-                    </p>
-                    <p>{languages.join(", ")}</p>
-                </div>
+                {showMore && description && (
+                    <div className="description-container">
+                        <p>{description}</p>
+                    </div>
+                )}
             </div>
-            <div className="company-logo-container">
-                <img className="logo" src={logo} alt={company} />
-            </div>
-        </div>
+        </>
     );
 }
 

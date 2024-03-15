@@ -6,11 +6,15 @@ function Search({ onSearch }) {
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value);
-        onSearch(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSearch(searchTerm);
     };
 
     return (
-        <form id="search-container">
+        <form id="search-container" onSubmit={handleSubmit}>
             <input
                 type="text"
                 onChange={handleChange}
