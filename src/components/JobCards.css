@@ -1,0 +1,89 @@
+.card-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 10rem;
+    width: 90%;
+    background-color: #ffff;
+    border-radius: 8px;
+    border: 2px solid hsl(0, 0%, 90%);
+    box-shadow: 0px 16px 32px 8px rgba(0, 0, 0, 0.05);
+}
+
+.basic-info-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.job-info-container {
+    margin-top: 16px;
+    margin-left: 24px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+.headline-url {
+    font-size: 20px;
+    margin-bottom: 14px;
+}
+p {
+    margin-top: 2px;
+}
+hr {
+    display: none;
+}
+strong {
+    font-weight: 600;
+}
+.employer-name {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.favorite-show-more-container {
+    width: 120px;
+    margin-top: 16px;
+    margin-right: 24px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: space-between;
+}
+.show-more-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+}
+.description-container {
+    margin: 0px 24px 24px 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgb(120, 120, 120);
+}
+.regular-url {
+    font-size: 16px;
+}
+
+.apply-logo-container {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+.apply-btn {
+    margin-top: 16px;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #a1a1a1;
+    color: #000000;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.apply-btn:hover {
+    background-color: #c8c8c8;
+    border-color: rgb(160, 200, 255); /* Ändra kantlinjens färg vid hover */
+}

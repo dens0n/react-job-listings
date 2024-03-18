@@ -1,12 +1,14 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Search from "./components/Search";
-import jobData from "./data";
+
 import JobCards from "./components/JobCards";
 
 function App() {
     const [jobList, setJobList] = useState([]);
     const [query, setQuery] = useState("stockholm");
+    const [noSearchResult, setNoSearchResult] = useState("");
+    const limit = 20
 
     const handleSearch = (searchTerm) => {
         setQuery(searchTerm);
@@ -16,11 +18,16 @@ function App() {
         const fetchData = async () => {
             try {
                 const res = await fetch(
-                    `https://jobsearch.api.jobtechdev.se/search?q=${query}`
+                    `https://jobsearch.api.jobtechdev.se/search?q=${query}&limit=${limit}`
                 );
                 const data = await res.json();
                 setJobList(data.hits);
                 console.log(data.hits[0]);
+                if (data.hits[0] === undefined) {
+                    setNoSearchResult("Inget sökresultat");
+                } else {
+                    setNoSearchResult("");
+                }
             } catch (err) {
                 console.error("Error fetching data:", err);
             }
@@ -42,6 +49,7 @@ function App() {
                 <Search onSearch={handleSearch} />
             </nav>
             <main>
+                {noSearchResult ? <h1>{noSearchResult}</h1> : ""}
                 {jobList.map((job, index) => (
                     <JobCards
                         id={index}

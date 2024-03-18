@@ -1,4 +1,5 @@
 import { FaStar, FaRegStar, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import "./JobCards.css"
 import { useState } from "react";
 
 function JobCards(props) {
@@ -78,9 +79,9 @@ function JobCards(props) {
                         >
                             {showMore ? "Visa mindre" : "Visa mer"}{" "}
                             {showMore ? (
-                                <FaAngleUp size={24} />
+                                <FaAngleUp size={20} />
                             ) : (
-                                <FaAngleDown size={24} />
+                                <FaAngleDown size={20} />
                             )}
                         </button>
                     </div>
