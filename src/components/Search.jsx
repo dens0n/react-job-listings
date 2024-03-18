@@ -36,15 +36,9 @@ function Search({ onSearch }) {
         }
     }, [searchTerm]);
 
-    useEffect(() => {
-        if (searchTerm === "") {
-            setSuggestions([]);
-        }
-    }, [searchTerm]);
-
     const handleChange = (e) => {
-        const inputValue = e.target.value;
-        setSearchTerm(inputValue);
+        setSearchTerm(e.target.value);
+        if (e.target.value === "") setSuggestions([]);
     };
 
     const handleSuggestionClick = (suggestion) => {
