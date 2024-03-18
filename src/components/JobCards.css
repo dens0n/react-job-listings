@@ -48,12 +48,18 @@ strong {
     align-items: end;
     justify-content: space-between;
 }
+.star:hover {
+    cursor: pointer;
+}
 .show-more-button {
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
     background: none;
+}
+.show-more-button:hover {
+    cursor: pointer;
 }
 .description-container {
     margin: 0px 24px 24px 24px;
