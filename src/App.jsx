@@ -8,7 +8,7 @@ function App() {
     const [jobList, setJobList] = useState([]);
     const [query, setQuery] = useState("stockholm");
     const [noSearchResult, setNoSearchResult] = useState("");
-    const limit = 20
+    const limit = 20;
 
     const handleSearch = (searchTerm) => {
         setQuery(searchTerm);
@@ -41,11 +41,14 @@ function App() {
     return (
         <>
             <nav>
-                <img
-                    src="./assets/JobChaser-logo.svg"
-                    alt="JobChaser Logo" // Provide a meaningful alt attribute
-                    width={"100px"}
-                />
+                <a href="#" onClick={() => window.location.reload()}>
+                    <img
+                        src="./assets/JobChaser-logo.svg"
+                        alt="JobChaser Logo" // Provide a meaningful alt attribute
+                        width={"100px"}
+                    />
+                </a>
+
                 <Search onSearch={handleSearch} />
             </nav>
             <main>
