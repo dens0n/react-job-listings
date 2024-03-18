@@ -12,6 +12,11 @@
     border: 2px solid hsl(0, 0%, 90%);
     border-radius: 10px;
 }
+.suggestion {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dddcdc;
+}
 .suggestion:hover {
     color: rgb(72, 113, 127);
     cursor: pointer;
