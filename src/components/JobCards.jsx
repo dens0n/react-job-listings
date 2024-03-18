@@ -65,12 +65,14 @@ function JobCards(props) {
                                 onClick={toggleFavorite}
                                 size={24}
                                 color="blue"
+                                className="star"
                             />
                         ) : (
                             <FaRegStar
                                 onClick={toggleFavorite}
                                 size={24}
                                 color="blue"
+                                className="star"
                             />
                         )}
                         <button
