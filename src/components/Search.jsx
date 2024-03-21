@@ -5,14 +5,7 @@ import Suggestions from "./Suggestions";
 import Fuse from "fuse.js";
 
 function Search({ onSearch }) {
-/*     const fuse = (data) => {
-        const fusedData = new Fuse(data, {
-            keys: ["occupation.label", "workplace_address.municipality"],
-            threshold: 0.1,
-        });
-        const searchResults = fuse.search(searchTerm);
-        console.log(searchResults);
-    }; */
+
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
@@ -61,6 +54,7 @@ function Search({ onSearch }) {
         e.preventDefault();
         onSearch(searchTerm);
         setSuggestions([]);
+        setSearchTerm("")
     };
 
     return (

@@ -1,8 +1,11 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Search from "./components/Search";
-
 import JobCards from "./components/JobCards";
+import { auth } from "./firebase/firebase-config";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignUpPage from "./components/pages/SignupPage";
+
 
 function App() {
     const [jobList, setJobList] = useState([]);
@@ -50,6 +53,8 @@ function App() {
                 </a>
 
                 <Search onSearch={handleSearch} />
+                <button>Log in</button>
+                <button>Sign up</button>
             </nav>
             <main>
                 {noSearchResult ? <h1>{noSearchResult}</h1> : ""}
