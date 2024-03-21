@@ -5,14 +5,6 @@ import Suggestions from "./Suggestions";
 import Fuse from "fuse.js";
 
 function Search({ onSearch }) {
-/*     const fuse = (data) => {
-        const fusedData = new Fuse(data, {
-            keys: ["occupation.label", "workplace_address.municipality"],
-            threshold: 0.1,
-        });
-        const searchResults = fuse.search(searchTerm);
-        console.log(searchResults);
-    }; */
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
@@ -23,17 +15,20 @@ function Search({ onSearch }) {
                     `https://jobsearch.api.jobtechdev.se/search?q=${inputValue}&limit=100`
                 );
                 const data = await response.json();
-                // fuse(data.hits);
 
-                const uniqueSuggestions = data.hits
-                    .map((job) =>
-                        job.occupation_group.label.replace(/\s*m\.fl\.\s*$/, "")
-                    )
-                    .filter((value, index, self) => {
-                        return self.indexOf(value) === index;
+                const fuse = (data) => {
+                    const fusedData = new Fuse(data, {
+                        keys: [
+                            "occupation.label",
+                            "workplace_address.municipality",
+                        ],
+                        threshold: 0.1,
                     });
-
-                setSuggestions(uniqueSuggestions);
+                    const searchResults = fusedData.search(searchTerm);
+                    console.log(searchResults);
+                    console.log(fusedData)
+                };
+                fuse(data)
             } catch (err) {
                 console.error("Error fetching suggestions:", err);
             }
