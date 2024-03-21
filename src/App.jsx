@@ -1,45 +1,17 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Search from "./components/Search";
-import JobCards from "./components/JobCards";
+import Home from "./components/pages/Home";
+import SignUpPage from "./components/pages/SignUpPage";
 import { auth } from "./firebase/firebase-config";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignUpPage from "./components/pages/SignupPage";
-
 
 function App() {
-    const [jobList, setJobList] = useState([]);
-    const [query, setQuery] = useState("stockholm");
-    const [noSearchResult, setNoSearchResult] = useState("");
-    const limit = 20;
+    const [searchQuery, setSearchQuery] = useState("stockholm");
 
     const handleSearch = (searchTerm) => {
-        setQuery(searchTerm);
+        setSearchQuery(searchTerm);
     };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(
-                    `https://jobsearch.api.jobtechdev.se/search?q=${query}&limit=${limit}`
-                );
-                const data = await res.json();
-                setJobList(data.hits);
-                console.log(data.hits[0]);
-                if (data.hits[0] === undefined) {
-                    setNoSearchResult("Inget sökresultat");
-                } else {
-                    setNoSearchResult("");
-                }
-            } catch (err) {
-                console.error("Error fetching data:", err);
-            }
-        };
-
-        if (query) {
-            fetchData(query);
-        }
-    }, [query]);
 
     return (
         <>
@@ -56,24 +28,8 @@ function App() {
                 <button>Log in</button>
                 <button>Sign up</button>
             </nav>
-            <main>
-                {noSearchResult ? <h1>{noSearchResult}</h1> : ""}
-                {jobList.map((job, index) => (
-                    <JobCards
-                        id={index}
-                        key={job.id}
-                        employer={job.employer.name}
-                        logo={job.logo_url}
-                        city={job.workplace_address.municipality}
-                        occupation={job.occupation.label}
-                        url={job.application_details.url}
-                        backupURL={job.webpage_url}
-                        headline={job.headline}
-                        postedAt={job.publication_date.slice(0, 10)}
-                        description={job.description.text_formatted}
-                    />
-                ))}
-            </main>
+            <Home searchQuery={searchQuery} />
+            <SignUpPage />
             <footer>
                 <p>@copyright</p>
             </footer>
