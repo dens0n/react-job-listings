@@ -1,4 +1,4 @@
-import {
+/* import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -60,3 +60,4 @@ onAuthStateChanged(auth3, (user) => {
 // Sign out
 
 
+ */

@@ -61,6 +61,7 @@ function Search({ onSearch }) {
         <form id="search-container" onSubmit={handleSubmit}>
             <div id="input-container">
                 <input
+                className="search-input"
                     type="text"
                     onChange={handleChange}
                     value={searchTerm}
