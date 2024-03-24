@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./Search.css";
-import Suggestions from "./Suggestions";
-import Fuse from "fuse.js";
+import Suggestions from "./Suggestions-component/Suggestions";
 
 function Search({ onSearch }) {
-
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
     useEffect(() => {
+        let isMounted = true;
+
         const fetchSuggestions = async (inputValue) => {
             try {
                 const response = await fetch(
-                    `https://jobsearch.api.jobtechdev.se/search?q=${inputValue}&limit=100`
+                    `https://jobsearch.api.jobtechdev.se/search?q=${inputValue}&limit=5`
                 );
                 const data = await response.json();
                 // fuse(data.hits);
@@ -26,7 +26,9 @@ function Search({ onSearch }) {
                         return self.indexOf(value) === index;
                     });
 
-                setSuggestions(uniqueSuggestions);
+                if (isMounted) {
+                    setSuggestions(uniqueSuggestions);
+                }
             } catch (err) {
                 console.error("Error fetching suggestions:", err);
             }
@@ -37,6 +39,10 @@ function Search({ onSearch }) {
         } else {
             setSuggestions([]);
         }
+
+        return () => {
+            isMounted = false;
+        };
     }, [searchTerm]);
 
     const handleChange = (e) => {
@@ -46,22 +52,22 @@ function Search({ onSearch }) {
 
     const handleSuggestionClick = (suggestion) => {
         onSearch(suggestion);
-        setSuggestions([]);
         setSearchTerm("");
+        setSuggestions([]);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         onSearch(searchTerm);
         setSuggestions([]);
-        setSearchTerm("")
+        setSearchTerm("");
     };
 
     return (
         <form id="search-container" onSubmit={handleSubmit}>
             <div id="input-container">
                 <input
-                className="search-input"
+                    className="search-input"
                     type="text"
                     onChange={handleChange}
                     value={searchTerm}

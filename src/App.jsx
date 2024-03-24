@@ -3,17 +3,17 @@ import {
     BrowserRouter,
     Routes,
     Route,
-    Link,
     Navigate,
     Outlet,
 } from "react-router-dom";
 import React, { useContext, useState } from "react";
-import Search from "./components/Search";
-import Home from "./components/pages/Home";
-import SignUpPage from "./components/pages/SignupPage";
-import SignInPage from "./components/pages/SignInPage";
-import Favorites from "./components/pages/Favorites";
 import { AuthContext } from "./Context/AuthContext";
+//pages And components:
+import Home from "./pages/Home";
+import SignUpPage from "./pages/SignupPage";
+import SignInPage from "./pages/SignInPage";
+import Favorites from "./pages/Favorites";
+import Nav from "./components/Nav-component/Nav";
 
 function ProtectedRoute() {
     const authContext = useContext(AuthContext);
@@ -32,28 +32,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <nav>
-                <Link to="/">
-                    <img
-                        src="./assets/JobChaser-logo.svg"
-                        alt="JobChaser Logo"
-                        width={"100px"}
-                        draggable="false"
-                    />
-                </Link>
-
-                <Search onSearch={handleSearch} />
-
-                <Link to="/signin">
-                    <button>Log in</button>
-                </Link>
-
-                <Link to="/signup">
-                    <button>Sign up</button>
-                </Link>
-                <button>Sign out</button>
-            </nav>
-
+            <Nav handleSearch={handleSearch} />
             <Routes>
                 <Route path="/" element={<Home searchQuery={searchQuery} />} />
                 <Route path="/signup" element={<SignUpPage />} />

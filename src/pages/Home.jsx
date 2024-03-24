@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import JobCards from "../JobCards"
+import JobCards from "../components/JobCards-component/JobCards"
 
 function Home({searchQuery}) {
 
