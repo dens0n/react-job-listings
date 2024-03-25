@@ -15,7 +15,6 @@ function Home({searchQuery}) {
                 );
                 const data = await res.json();
                 setJobList(data.hits);
-                console.log(data.hits[0]);
                 if (data.hits[0] === undefined) {
                     setNoSearchResult("Inget sökresultat");
                 } else {
