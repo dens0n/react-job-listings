@@ -1,27 +1,26 @@
 import "./Nav.css";
-
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Search from "./Search-component/Search";
-import { useState, useEffect } from "react"; // Import useState and useEffect
-import { signOut, onAuthStateChanged } from "firebase/auth"; // Import onAuthStateChanged
+import { useState, useEffect } from "react";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 
 function Nav({ handleSearch }) {
-    const [user, setUser] = useState(null); // State to hold the user authentication status
+    const [user, setUser] = useState(null);
+    const location = useLocation(); // Get the current location using useLocation hook
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user); // Update the user state when the authentication state changes
+            setUser(user);
         });
 
-        return () => unsubscribe(); // Unsubscribe from the authentication state listener when component unmounts
+        return () => unsubscribe();
     }, []);
 
     const handleSignOut = () => {
         signOut(auth)
             .then(() => {
                 console.log("User signed out successfully");
-                // Additional actions after sign out, such as redirecting to another page
             })
             .catch((error) => {
                 console.error("Error signing out:", error);
@@ -39,13 +38,17 @@ function Nav({ handleSearch }) {
                 />
             </Link>
 
-            <Search onSearch={handleSearch} />
+            {/* Conditionally render the Search component based on the current location */}
+            {location.pathname === "/" && <Search onSearch={handleSearch} />}
 
-            <Link to="/favorites">
-                <button>Favorites</button>
-            </Link>
+            {user ? (
+                <Link to="/favorites">
+                    <button>Favorites</button>
+                </Link>
+            ) : (
+                ""
+            )}
 
-            {/* Conditionally render the Log in button based on user authentication state */}
             {user ? (
                 <button onClick={handleSignOut}>Sign out</button>
             ) : (
