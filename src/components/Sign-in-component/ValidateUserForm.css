@@ -1,0 +1,80 @@
+/* 
+
+Färger:
+mörk/svart: 1B262C
+mörkblå: 0F4C75
+ljusblå: 3282B8
+vit/blå: BBE1FA
+vit: ffff
+
+Grå:
+#eee
+#ddd
+
+*/
+
+.validate-user-form {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+.validate-user-form h1 {
+    text-align: center;
+    color: #1b262c;
+    font-size: 32px;
+}
+.validate-user-form div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.validate-user-form input,
+.validate-user-form input {
+    font-size: 20px;
+    min-width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #3282b8;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.submit-btn:hover {
+    background: #0f4c75;
+}
+
+.validate-user-form span {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+.validate-user-form a {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    text-decoration: none;
+    color: #3282b8;
+}
+
+.validate-user-form a:hover {
+    text-decoration: underline;
+}

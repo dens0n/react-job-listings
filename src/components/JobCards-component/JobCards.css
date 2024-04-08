@@ -1,3 +1,18 @@
+/* 
+
+Färger:
+mörk/svart: 1B262C
+mörkblå: 0F4C75
+ljusblå: 3282B8
+vit/blå: BBE1FA
+vit: ffff
+
+Grå:
+#eee
+#ddd
+
+*/
+
 .card-container {
     display: flex;
     flex-direction: column;
@@ -24,6 +39,14 @@
 .headline-url {
     font-size: 20px;
     margin-bottom: 14px;
+    color: #3282b8;
+    text-decoration: none;
+}
+.headline-url:visited {
+    color: #0f1753;
+}
+.headline-url:hover {
+    text-decoration: underline;
 }
 p {
     margin-top: 2px;
@@ -80,8 +103,8 @@ strong {
     margin-top: 16px;
     display: inline-block;
     padding: 8px 16px;
-    background-color: #a1a1a1;
-    color: #000000;
+    background-color: #3282b8;
+    color: #ffff;
     text-decoration: none;
     border: 1px solid transparent;
     border-radius: 4px;
@@ -90,6 +113,6 @@ strong {
 }
 
 .apply-btn:hover {
-    background-color: #c8c8c8;
+    background-color: #0f4c75;
     border-color: rgb(160, 200, 255); /* Ändra kantlinjens färg vid hover */
 }

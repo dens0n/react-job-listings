@@ -1,5 +1,5 @@
 import { FaStar, FaRegStar, FaAngleDown, FaAngleUp } from "react-icons/fa";
-import "./JobCards.css"
+import "./JobCards.css";
 import { useState } from "react";
 
 function JobCards(props) {
@@ -64,14 +64,14 @@ function JobCards(props) {
                             <FaStar
                                 onClick={toggleFavorite}
                                 size={24}
-                                color="blue"
+                                color="#3282b8"
                                 className="star"
                             />
                         ) : (
                             <FaRegStar
                                 onClick={toggleFavorite}
                                 size={24}
-                                color="blue"
+                                color="#3282b8"
                                 className="star"
                             />
                         )}

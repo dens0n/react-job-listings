@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
+import "./ValidateUserForm.css";
 
 function SignInForm() {
     const navigate = useNavigate();
@@ -33,10 +34,15 @@ function SignInForm() {
 
     return (
         <>
-            <form onSubmit={handleSubmit(formSubmit)}>
+            <form
+                className="validate-user-form"
+                onSubmit={handleSubmit(formSubmit)}
+            >
+                <h1>Sign In</h1>
                 <div>
-                    <label htmlFor="email">Email:</label>
+                    {/* <label htmlFor="email"></label> */}
                     <input
+                        placeholder="Email..."
                         id="email"
                         type="email"
                         {...register("email", {
@@ -51,8 +57,9 @@ function SignInForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="password">Password:</label>
+                    {/* <label htmlFor="password">Password:</label> */}
                     <input
+                        placeholder="Password..."
                         id="password"
                         type="password"
                         {...register("password", {
@@ -67,10 +74,11 @@ function SignInForm() {
                     {errors.password && <span>{errors.password.message}</span>}
                 </div>
 
-                <button type="submit">Log in</button>
+                <button type="submit" className="submit-btn">
+                    Sign in
+                </button>
+                <Link to="/signup">Don't have an account? Sign Up</Link>
             </form>
-
-            <Link to="/signup">Don't have an account? Sign Up</Link>
         </>
     );
 }
