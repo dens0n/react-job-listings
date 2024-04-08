@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "./Context/AuthContext";
-//pages And components:
 import Home from "./pages/Home";
 import SignUpPage from "./pages/SignupPage";
 import SignInPage from "./pages/SignInPage";
@@ -18,7 +17,6 @@ import Nav from "./components/Nav-component/Nav";
 function ProtectedRoute() {
     const authContext = useContext(AuthContext);
     const isAuth = authContext && authContext.user !== null;
-    console.log(isAuth);
 
     return isAuth ? <Outlet /> : <Navigate to="/signin" replace />;
 }
