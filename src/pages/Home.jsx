@@ -34,7 +34,7 @@ export default function Home() {
                           backgroundRepeat: "no-repeat",
                           backgroundPosition: "center",
                           backgroundSize: "cover",
-                          height: "90vh",
+                          height: "100vh",
                       }
                     : {}
             }

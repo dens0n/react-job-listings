@@ -4,15 +4,16 @@ import { setJobs } from "../store/slices/JobSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function JobListing() {
+    const limit = 100;
     const dispatch = useDispatch();
-    const searchQuery = useSelector((state) => state.jobs.search);
     const [loading, setLoading] = useState(false);
-    const limit = 20;
+    const searchQuery = useSelector((state) => state.jobs.search);
     const jobs = useSelector((state) => state.jobs.jobs);
+    const [openCardId, setOpenCardId] = useState(null); // Tillstånd för att hålla reda på ID:t för det öppna kortet
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true); // Sätt loading till true när data laddas
+            setLoading(true);
             try {
                 const res = await fetch(
                     `https://jobsearch.api.jobtechdev.se/search?q=${searchQuery}&limit=${limit}`
@@ -22,7 +23,7 @@ function JobListing() {
             } catch (err) {
                 console.error("Error fetching data:", err);
             } finally {
-                setLoading(false); // Sätt loading till false när data har laddats
+                setLoading(false);
             }
         };
 
@@ -31,16 +32,19 @@ function JobListing() {
         }
     }, [searchQuery, dispatch]);
 
+    const handleOpenCard = (id) => {
+        setOpenCardId(openCardId === id ? null : id); // Uppdatera ID:t för det öppna kortet
+    };
+
     return (
         <main>
-            {loading && <h1>Laddar...</h1>}{" "}
-            {/* Visa Loading... medan data laddas */}
-            {!loading && jobs.length === 0 && <h1>Inget sökresultat</h1>}{" "}
-            {/* Visa "Inget sökresultat" om det inte finns någon data och laddningen är klar */}
-            {/* Visa jobblistan om laddningen är klar och det finns data */}
+            {loading && <h1>Laddar...</h1>}
+            {!loading && jobs.length === 0 && <h1>Inget sökresultat</h1>}
             {!loading &&
                 jobs.map((job, index) => (
                     <JobCards
+                        handleOpenCard={handleOpenCard}
+                        isOpen={openCardId === index}
                         id={index}
                         key={job.id}
                         employer={job.employer.name}

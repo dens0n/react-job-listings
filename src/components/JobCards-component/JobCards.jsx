@@ -2,29 +2,28 @@ import { FaStar, FaRegStar, FaAngleDown, FaAngleUp } from "react-icons/fa";
 import "./JobCards.css";
 import { useState } from "react";
 
-function JobCards(props) {
-    const {
-        id,
-        employer,
-        logo,
-        city,
-        occupation,
-        url,
-        backupURL,
-        headline,
-        postedAt,
-        description,
-    } = props;
-
+function JobCards({
+    id,
+    employer,
+    logo,
+    city,
+    occupation,
+    url,
+    backupURL,
+    headline,
+    postedAt,
+    description,
+    handleOpenCard,
+    isOpen,
+}) {
     const [isFavorite, setIsFavorite] = useState(false);
-    const [showMore, setShowMore] = useState(false);
 
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
     };
 
     const toggleShowMore = () => {
-        setShowMore(!showMore);
+        handleOpenCard(id);
     };
 
     const isHTML = (str) => {
@@ -79,8 +78,8 @@ function JobCards(props) {
                             className="show-more-button"
                             onClick={toggleShowMore}
                         >
-                            {showMore ? "Visa mindre" : "Visa mer"}{" "}
-                            {showMore ? (
+                            {isOpen ? "Visa mindre" : "Visa mer"}
+                            {isOpen ? (
                                 <FaAngleUp size={20} />
                             ) : (
                                 <FaAngleDown size={20} />
@@ -88,7 +87,7 @@ function JobCards(props) {
                         </button>
                     </div>
                 </div>
-                {showMore && description && (
+                {isOpen && description && (
                     <div className="description-container">
                         <strong>Beskrivning:</strong>
                         <br />
