@@ -40,9 +40,9 @@ function App() {
                 </Route>
             </Routes>
 
-            <footer>
+           {/*  <footer>
                 <p>@Footer</p>
-            </footer>
+            </footer> */}
         </BrowserRouter>
     );
 }

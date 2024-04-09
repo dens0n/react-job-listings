@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import FilterRegion from "../components/Filter-component/FilterRegion";
 import JobCards from "../components/JobCards-component/JobCards";
 import { setReduxJobs } from "../store/slices/JobSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,6 +47,7 @@ function JobListing() {
 
     return (
         <main>
+            <FilterRegion />
             {loading && <h1>Laddar...</h1>}
             {!loading && jobs.length === 0 && <h1>Inget sökresultat</h1>}
             {!loading &&
