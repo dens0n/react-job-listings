@@ -93,7 +93,7 @@ export default function FilterRegion() {
                     <option disabled value="">
                         Anställningstyp
                     </option>
-                    <option value="">Alla</option>
+                    <option value="Alla">Alla</option>
                     <option value="heltid">Heltid</option>
                     <option value="deltid">Deltid</option>
                 </select>

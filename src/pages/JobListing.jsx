@@ -8,8 +8,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 function JobListing() {
-    const limit = 100;
     const dispatch = useDispatch();
+    const limit = 20;
     const [loading, setLoading] = useState(false);
     const searchQuery = useSelector((state) => state.jobs.search);
     const municipality = useSelector((state) => state.jobs.municipality);
@@ -46,6 +46,7 @@ function JobListing() {
             fetchData();
         }
     }, [searchQuery, municipality, dispatch]);
+
     useEffect(() => {
         // Sortera jobb baserat på anställningstyp när filter ändras
         dispatch(sortJobsByEmploymentType());

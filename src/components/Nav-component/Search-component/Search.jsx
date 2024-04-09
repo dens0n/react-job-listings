@@ -6,7 +6,7 @@ import { FaSearch } from "react-icons/fa";
 import "./Search.css";
 import Suggestions from "./Suggestions-component/Suggestions";
 
-function Search({ onSearch }) {
+function Search() {
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
@@ -54,7 +54,6 @@ function Search({ onSearch }) {
     };
 
     const handleSuggestionClick = (suggestion) => {
-        // onSearch(suggestion); //gamla sök
         dispatch(reduxSearch(suggestion));
         setSearchTerm("");
         setSuggestions([]);
@@ -62,7 +61,6 @@ function Search({ onSearch }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // onSearch(searchTerm); //gamla sök
         dispatch(reduxSearch(searchTerm));
         setSuggestions([]);
         setSearchTerm("");

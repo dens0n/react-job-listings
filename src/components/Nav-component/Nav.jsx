@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import JobChaserLogo from "./JobChaserLogo-component/JobChaserLogo";
+import { useDispatch } from "react-redux";
+import { setReduxMunicipality } from "../../store/slices/JobSlice";
 
 function Nav() {
+    const dispatch = useDispatch();
     const [user, setUser] = useState(null);
     const location = useLocation(); // Get the current location using useLocation hook
 
@@ -27,6 +30,13 @@ function Nav() {
                 console.error("Error signing out:", error);
             });
     };
+
+    useEffect(() => {
+        //Återställer region om man lämnar jblisting
+        if (location.pathname !== "/joblisting") {
+            dispatch(setReduxMunicipality(""));
+        }
+    }, [location, dispatch]);
 
     return (
         <nav
