@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
-import "../Sign-in-component/ValidateUserForm.css";
+import "./ValidateUserForm.css";
 
 function SignUpForm() {
     const navigate = useNavigate();

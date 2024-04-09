@@ -8,7 +8,6 @@ Färger:
 
 */
 
-
 * {
     margin: 0;
     box-sizing: border-box;
@@ -24,7 +23,6 @@ Färger:
 
 /*  */
 
-
 /*  */
 
 /* Main */
@@ -32,8 +30,8 @@ Färger:
 /*  */
 
 main {
-    margin-top: 90px;
-    min-height: 82vh;
+    /*    margin-top: 90px; */
+    min-height: calc(100vh - 10vh - 90px);
     background-color: #f4f2ee;
     padding: 16px;
     display: flex;

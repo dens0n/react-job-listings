@@ -6,9 +6,10 @@ import {
     Navigate,
     Outlet,
 } from "react-router-dom";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "./Context/AuthContext";
 import Home from "./pages/Home";
+import JobListing from "./pages/JobListing";
 import SignUpPage from "./pages/SignupPage";
 import SignInPage from "./pages/SignInPage";
 import Favorites from "./pages/Favorites";
@@ -22,17 +23,16 @@ function ProtectedRoute() {
 }
 
 function App() {
-    const [searchQuery, setSearchQuery] = useState("stockholm");
-
-    const handleSearch = (searchTerm) => {
-        setSearchQuery(searchTerm);
-    };
-
     return (
         <BrowserRouter>
-            <Nav handleSearch={handleSearch} />
-            <Routes>
-                <Route path="/" element={<Home searchQuery={searchQuery} />} />
+            <Nav />
+            <Routes
+                style={{
+                    backgroundImage: "url('../../public/assets/workplace.jpg')",
+                }}
+            >
+                <Route path="/" element={<Home />} />
+                <Route path="/joblisting" element={<JobListing />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/signin" element={<SignInPage />} />
                 <Route path="/favorites" element={<ProtectedRoute />}>
@@ -41,7 +41,7 @@ function App() {
             </Routes>
 
             <footer>
-                <p>@copyright</p>
+                <p>@Footer</p>
             </footer>
         </BrowserRouter>
     );

@@ -6,7 +6,7 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
 import JobChaserLogo from "./JobChaserLogo-component/JobChaserLogo";
 
-function Nav({ handleSearch }) {
+function Nav() {
     const [user, setUser] = useState(null);
     const location = useLocation(); // Get the current location using useLocation hook
 
@@ -29,20 +29,21 @@ function Nav({ handleSearch }) {
     };
 
     return (
-        <nav>
+        <nav
+            style={
+                location.pathname === "/"
+                    ? {
+                          position: "fixed",
+                          backgroundColor: "transparent",
+                      }
+                    : {}
+            }
+        >
             <Link to="/">
                 <JobChaserLogo />
-                {/*  <img
-                    src={"./assets/JobChaser-logo.svg"}
-                    alt="JobChaser Logo"
-                    width={100}
-                    className="logo"
-                    draggable={false}
-                /> */}
             </Link>
 
-            {/* Conditionally render the Search component based on the current location */}
-            {location.pathname === "/" && <Search onSearch={handleSearch} />}
+            {location.pathname === "/joblisting" && <Search />}
             <div className="button-container">
                 {user ? (
                     <Link to="/favorites">

@@ -27,12 +27,12 @@ function JobCards(props) {
         setShowMore(!showMore);
     };
 
-    function isHTML(str) {
+    const isHTML = (str) => {
         const doc = new DOMParser().parseFromString(str, "text/html");
         return Array.from(doc.body.childNodes).some(
             (node) => node.nodeType === 1
         );
-    }
+    };
 
     // Funktion för att göra länkar klickbara
     const makeLinksClickable = (text) => {

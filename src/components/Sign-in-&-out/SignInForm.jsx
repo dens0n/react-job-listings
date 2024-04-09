@@ -22,7 +22,7 @@ function SignInForm() {
                 // Signed in
                 const user = userCredential.user;
                 console.log("User signed in: ", user);
-                navigate("/favorites");
+                navigate("/home");
             })
             .catch((error) => {
                 const errorCode = error.code;

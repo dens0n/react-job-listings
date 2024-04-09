@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
+import { reduxSearch } from "../../../store/slices/JobSlice";
+import { useDispatch } from "react-redux";
+
 import { FaSearch } from "react-icons/fa";
 import "./Search.css";
 import Suggestions from "./Suggestions-component/Suggestions";
 
 function Search({ onSearch }) {
+    const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
@@ -16,7 +20,6 @@ function Search({ onSearch }) {
                     `https://jobsearch.api.jobtechdev.se/search?q=${inputValue}&limit=5`
                 );
                 const data = await response.json();
-                // fuse(data.hits);
 
                 const uniqueSuggestions = data.hits
                     .map((job) =>
@@ -51,14 +54,16 @@ function Search({ onSearch }) {
     };
 
     const handleSuggestionClick = (suggestion) => {
-        onSearch(suggestion);
+        // onSearch(suggestion); //gamla sök
+        dispatch(reduxSearch(suggestion));
         setSearchTerm("");
         setSuggestions([]);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSearch(searchTerm);
+        // onSearch(searchTerm); //gamla sök
+        dispatch(reduxSearch(searchTerm));
         setSuggestions([]);
         setSearchTerm("");
     };

@@ -1,55 +1,65 @@
-import { useState,useEffect } from "react";
-import JobCards from "../components/JobCards-component/JobCards"
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { reduxSearch } from "../store/slices/JobSlice";
+import { useDispatch } from "react-redux";
+import { FaSearch } from "react-icons/fa";
+import "./Search2.css";
 
-function Home({searchQuery}) {
+export default function Home() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); // Using useNavigate hook
+    const location = useLocation();
 
-    const [jobList, setJobList] = useState([]);
-    const [noSearchResult, setNoSearchResult] = useState("");
-    const limit = 20;
+    const [searchTerm, setSearchTerm] = useState("");
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(
-                    `https://jobsearch.api.jobtechdev.se/search?q=${searchQuery}&limit=${limit}`
-                );
-                const data = await res.json();
-                setJobList(data.hits);
-                if (data.hits[0] === undefined) {
-                    setNoSearchResult("Inget sökresultat");
-                } else {
-                    setNoSearchResult("");
-                }
-            } catch (err) {
-                console.error("Error fetching data:", err);
-            }
-        };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formattedSearchTerm = searchTerm.split(" ").join(",");
+        console.log(formattedSearchTerm);
+        dispatch(reduxSearch(searchTerm));
+        setSearchTerm("");
+        navigate("/joblisting"); // Navigate to /joblisting route
+    };
 
-        if (searchQuery) {
-            fetchData(searchQuery);
-        }
-    }, [searchQuery]);
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
     return (
-        <main>
-            {noSearchResult ? <h1>{noSearchResult}</h1> : ""}
-            {jobList.map((job, index) => (
-                <JobCards
-                    id={index}
-                    key={job.id}
-                    employer={job.employer.name}
-                    logo={job.logo_url}
-                    city={job.workplace_address.municipality}
-                    occupation={job.occupation.label}
-                    url={job.application_details.url}
-                    backupURL={job.webpage_url}
-                    headline={job.headline}
-                    postedAt={job.publication_date.slice(0, 10)}
-                    description={job.description.text_formatted}
-                />
-            ))}
+        <main
+            style={
+                location.pathname === "/"
+                    ? {
+                          backgroundImage: "url('./assets/workplace.jpg')",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center",
+                          backgroundSize: "cover",
+                          height: "90vh",
+                      }
+                    : {}
+            }
+        >
+            <form
+                style={{
+                    margin: "auto",
+                }}
+                id="search-container"
+                onSubmit={handleSubmit}
+            >
+                <div id="input-container">
+                    <input
+                        className="search-input"
+                        type="text"
+                        onChange={handleChange}
+                        value={searchTerm}
+                        placeholder="Search..."
+                    />
+                    {/* Removed Link wrapper */}
+                    <button id="search-button" type="submit">
+                        <FaSearch id="search-icon" />
+                    </button>
+                </div>
+            </form>
         </main>
     );
 }
-
-export default Home;
