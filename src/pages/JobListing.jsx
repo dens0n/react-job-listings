@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import JobCards from "../components/JobCards-component/JobCards";
-import { setJobs } from "../store/slices/JobSlice";
+import { setReduxJobs } from "../store/slices/JobSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function JobListing() {
@@ -8,18 +8,26 @@ function JobListing() {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const searchQuery = useSelector((state) => state.jobs.search);
+    const municipality = useSelector((state) => state.jobs.municipality);
     const jobs = useSelector((state) => state.jobs.jobs);
-    const [openCardId, setOpenCardId] = useState(null); // Tillstånd för att hålla reda på ID:t för det öppna kortet
+    const [openCardId, setOpenCardId] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const res = await fetch(
-                    `https://jobsearch.api.jobtechdev.se/search?q=${searchQuery}&limit=${limit}`
-                );
+                let url = `https://jobsearch.api.jobtechdev.se/search?limit=${limit}`;
+
+                if (searchQuery) {
+                    url += `&q=${searchQuery}`;
+                }
+                if (municipality) {
+                    url += `&municipality=${municipality}`;
+                }
+
+                const res = await fetch(url);
                 const data = await res.json();
-                dispatch(setJobs(data.hits));
+                dispatch(setReduxJobs(data.hits));
             } catch (err) {
                 console.error("Error fetching data:", err);
             } finally {
@@ -27,13 +35,13 @@ function JobListing() {
             }
         };
 
-        if (searchQuery) {
-            fetchData(searchQuery);
+        if (searchQuery || municipality) {
+            fetchData();
         }
-    }, [searchQuery, dispatch]);
+    }, [searchQuery, municipality, dispatch]);
 
     const handleOpenCard = (id) => {
-        setOpenCardId(openCardId === id ? null : id); // Uppdatera ID:t för det öppna kortet
+        setOpenCardId(openCardId === id ? null : id);
     };
 
     return (

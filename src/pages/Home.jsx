@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import FilterRegion from"../components/Filter-component/FilterRegion"
+import { useNavigate, useLocation } from "react-router-dom";
 import { reduxSearch } from "../store/slices/JobSlice";
 import { useDispatch } from "react-redux";
 import { FaSearch } from "react-icons/fa";
@@ -9,7 +10,6 @@ export default function Home() {
     const dispatch = useDispatch();
     const navigate = useNavigate(); // Using useNavigate hook
     const location = useLocation();
-
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSubmit = (e) => {
@@ -54,12 +54,12 @@ export default function Home() {
                         value={searchTerm}
                         placeholder="Search..."
                     />
-                    {/* Removed Link wrapper */}
                     <button id="search-button" type="submit">
                         <FaSearch id="search-icon" />
                     </button>
                 </div>
             </form>
+            <FilterRegion />
         </main>
     );
 }
