@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FilterRegion from"../components/Filter-component/FilterRegion"
+import FilterRegion from "../components/Filter-component/FilterRegion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { reduxSearch } from "../store/slices/JobSlice";
 import { useDispatch } from "react-redux";
@@ -35,17 +35,14 @@ export default function Home() {
                           backgroundPosition: "center",
                           backgroundSize: "cover",
                           height: "100vh",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                       }
                     : {}
             }
         >
-            <form
-                style={{
-                    margin: "auto",
-                }}
-                id="search-container"
-                onSubmit={handleSubmit}
-            >
+            <form id="search-container" onSubmit={handleSubmit}>
                 <div id="input-container">
                     <input
                         className="search-input"

@@ -1,3 +1,4 @@
+import "./FilterRegion.css";
 import React, { useState } from "react";
 import regions from "../../regions/regions";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,8 +29,12 @@ export default function FilterRegion() {
     };
 
     return (
-        <div>
-            <select name="location" onChange={handleFilterChange}>
+        <div className="selection-container">
+            <select
+                className="location-selection"
+                name="region"
+                onChange={handleFilterChange}
+            >
                 <option value="">Välj region</option>
                 {Object.keys(regions).map((region) => (
                     <option value={region} key={region}>
@@ -38,6 +43,7 @@ export default function FilterRegion() {
                 ))}
             </select>
             <select
+                className="location-selection"
                 name="municipalities"
                 onChange={handleSelection}
                 disabled={!selectedRegion}
