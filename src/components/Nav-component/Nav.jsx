@@ -1,14 +1,14 @@
 import "./Nav.css";
 import { Link, useLocation } from "react-router-dom";
-import Search from "./Search-component/Search";
 import { useState, useEffect } from "react";
+import Search from "./Search-component/Search";
+import JobChaserLogo from "./JobChaserLogo-component/JobChaserLogo";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase-config";
-import JobChaserLogo from "./JobChaserLogo-component/JobChaserLogo";
 import { useDispatch } from "react-redux";
-import { setReduxMunicipality } from "../../store/slices/JobSlice";
+import { setReduxMunicipality, reduxSearch } from "../../store/slices/JobSlice";
 
-function Nav() {
+export default function Nav() {
     const dispatch = useDispatch();
     const [user, setUser] = useState(null);
     const location = useLocation(); // Get the current location using useLocation hook
@@ -32,9 +32,10 @@ function Nav() {
     };
 
     useEffect(() => {
-        //Återställer region om man lämnar jblisting
+        //Återställer region om man lämnar /joblisting
         if (location.pathname !== "/joblisting") {
             dispatch(setReduxMunicipality(""));
+            dispatch(reduxSearch(""));
         }
     }, [location, dispatch]);
 
@@ -94,5 +95,3 @@ function Nav() {
         </nav>
     );
 }
-
-export default Nav;
