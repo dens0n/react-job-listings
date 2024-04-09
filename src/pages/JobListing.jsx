@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import FilterRegion from "../components/Filter-component/FilterRegion";
 import JobCards from "../components/JobCards-component/JobCards";
-import { setReduxJobs } from "../store/slices/JobSlice";
+import {
+    setReduxJobs,
+    sortJobsByEmploymentType,
+} from "../store/slices/JobSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function JobListing() {
@@ -12,7 +15,9 @@ function JobListing() {
     const municipality = useSelector((state) => state.jobs.municipality);
     const jobs = useSelector((state) => state.jobs.jobs);
     const [openCardId, setOpenCardId] = useState(null);
-
+    const employmentTypeFilter = useSelector(
+        (state) => state.jobs.employmentTypeFilter
+    );
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -28,6 +33,7 @@ function JobListing() {
 
                 const res = await fetch(url);
                 const data = await res.json();
+                console.log(data.hits);
                 dispatch(setReduxJobs(data.hits));
             } catch (err) {
                 console.error("Error fetching data:", err);
@@ -40,6 +46,10 @@ function JobListing() {
             fetchData();
         }
     }, [searchQuery, municipality, dispatch]);
+    useEffect(() => {
+        // Sortera jobb baserat på anställningstyp när filter ändras
+        dispatch(sortJobsByEmploymentType());
+    }, [employmentTypeFilter, dispatch]);
 
     const handleOpenCard = (id) => {
         setOpenCardId(openCardId === id ? null : id);
@@ -60,6 +70,7 @@ function JobListing() {
                         employer={job.employer.name}
                         logo={job.logo_url}
                         city={job.workplace_address.municipality}
+                        employmentType={job.working_hours_type.label}
                         occupation={job.occupation.label}
                         url={job.application_details.url}
                         backupURL={job.webpage_url}

@@ -15,6 +15,7 @@ function JobCards({
     description,
     handleOpenCard,
     isOpen,
+    employmentType,
 }) {
     const [isFavorite, setIsFavorite] = useState(false);
 
@@ -56,7 +57,10 @@ function JobCards({
                             {employer} - {city}
                         </p>
                         <p>{occupation ? occupation : ""}</p>
-                        <p>{postedAt ? `Publicerad: ${postedAt}` : ""}</p>
+                        <div style={{ display: "flex", gap: "16px" }}>
+                            <p>{postedAt ? `Publicerad: ${postedAt}` : ""}</p>
+                            <p>{employmentType}</p>
+                        </div>
                     </div>
                     <div className="favorite-show-more-container">
                         {isFavorite ? (
