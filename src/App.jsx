@@ -40,7 +40,7 @@ function App() {
                 </Route>
             </Routes>
 
-           {/*  <footer>
+            {/*  <footer>
                 <p>@Footer</p>
             </footer> */}
         </BrowserRouter>
@@ -48,3 +48,8 @@ function App() {
 }
 
 export default App;
+
+//dsfdgagd
+//dsadafda
+//edfEFASDF
+//FSDAFDSAGR
