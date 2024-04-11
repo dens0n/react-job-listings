@@ -1,21 +1,25 @@
 #suggestion-list {
+    z-index: 50;
     list-style: none;
-    line-height: 24px;
+    line-height: 32px;
     max-height: 20rem;
     overflow-y: auto;
     overflow-x: hidden;
     width: 25rem;
-    padding: 16px;
+    padding: 0px 16px 0px 16px;
     background: white;
     position: absolute;
-    top: 59px;
+    top: 65px;
     border: 2px solid hsl(0, 0%, 90%);
-    border-radius: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.5);
+
 }
 .suggestion {
-    margin-top: 5px;
+    margin-top: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #dddcdc;
+   /*  border-bottom: 1px solid #dddcdc;
+    border-top: 1px solid #dddcdc; */
 }
 .suggestion:hover {
     color: rgb(72, 113, 127);

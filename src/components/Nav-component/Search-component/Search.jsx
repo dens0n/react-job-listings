@@ -10,6 +10,7 @@ function Search() {
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [isFocused, setIsFocused] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -66,9 +67,21 @@ function Search() {
         setSearchTerm("");
     };
 
+    const handleInputFocus = () => {
+        setIsFocused(true);
+    };
+
+    const handleInputBlur = () => {
+        setIsFocused(false);
+    };
+
     return (
         <form id="search-container" onSubmit={handleSubmit}>
-            <div id="input-container">
+            <div
+                id="input-container"
+                onBlur={handleInputBlur}
+                onFocus={handleInputFocus}
+            >
                 <input
                     className="search-input"
                     type="text"
@@ -80,7 +93,7 @@ function Search() {
                     <FaSearch id="search-icon" />
                 </button>
             </div>
-            {suggestions.length > 0 && (
+            {isFocused && suggestions.length > 0 && (
                 <Suggestions
                     suggestions={suggestions}
                     onSuggestionClick={handleSuggestionClick}
